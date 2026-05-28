@@ -79,17 +79,17 @@
     </form>
 
     <script>
+        'use strict';
+        
         document.getElementById('pensionForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            
-            // Получаем значения из формы
+        
             const age = parseInt(document.getElementById('age').value);
             const gender = document.querySelector('input[name="gender"]:checked').value;
             const resultArea = document.getElementById('result');
             
             let message = '';
             
-            // Проверяем условия и формируем сообщение
             if (age >= 0 && age <= 17) {
                 message = 'Вам работать ещё рано — учитесь';
             } else if (
@@ -111,7 +111,6 @@
                 message = 'Да кто ты такой?';
             }
             
-            // Выводим результат в textarea
             resultArea.value = message;
         });
     </script>
