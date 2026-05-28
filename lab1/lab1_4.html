@@ -1,1 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Простые числа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            min-height: 50px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Простые числа</h1>
+    
+    <form id="primesForm">
+        <div class="form-group">
+            <label for="n">Введите число n (больше 1):</label>
+            <input type="number" id="n" name="n" min="2" required>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit">Найти простые числа</button>
+        </div>
+    </form>
+
+    <div id="result">
+        <!-- Здесь будет отображаться результат -->
+    </div>
+
+    <script>
+        'use strict';
+        document.getElementById('primesForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const n = parseInt(document.getElementById('n').value);
+            const resultDiv = document.getElementById('result');
+            
+            if (n < 2) {
+                resultDiv.innerHTML = '<p class="error">Число должно быть больше 1!</p>';
+                return;
+            }
+
+            function isPrime(num) {
+                if (num < 2) return false;
+                if (num === 2) return true;
+                if (num % 2 === 0) return false;
+                
+                const sqrt = Math.sqrt(num);
+                for (let i = 3; i <= sqrt; i += 2) {
+                    if (num % i === 0) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            
+            const primes = [];
+            for (let i = 2; i <= n; i++) {
+                if (isPrime(i)) {
+                    primes.push(i);
+                }
+            }
+            
+            if (primes.length > 0) {
+                resultDiv.innerHTML = `
+                    <p>Простые числа в интервале от 2 до ${n}:</p>
+                    <p><strong>${primes.join(', ')}</strong></p>
+                `;
+            } else {
+                resultDiv.innerHTML = '<p>В указанном интервале нет простых чисел.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
 
