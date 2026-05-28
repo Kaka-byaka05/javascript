@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Таблица</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Таблица</h1>
+    
+    <form id="tableForm">
+        <div class="form-group">
+            <label for="rows">Число строк:</label>
+            <input type="number" id="rows" name="rows" min="1" required>
+        </div>
+        
+        <div class="form-group">
+            <button type="button" id="drawButton">Рисовать</button>
+        </div>
+    </form>
+
+    <script>
+        'use strict';
+        document.getElementById('drawButton').addEventListener('click', function() {
+            const rows = parseInt(document.getElementById('rows').value);
+            
+            if (isNaN(rows) || rows < 1) {
+                alert('Пожалуйста, введите корректное число строк (не меньше 1)');
+                return;
+            }
+            
+            const baseSequence = ['dog', 'dog', 'dog', 'cat', 'cat'];
+            
+            function generateRow(startIndex) {
+                const row = [];
+                
+                for (let i = 0; i < 6; i++) {
+                    const animalIndex = (startIndex + i) % baseSequence.length;
+                    row.push(baseSequence[animalIndex]);
+                }
+                
+                return row.join('\t');
+            }
+            
+            for (let rowNum = 0; rowNum < rows; rowNum++) {
+                const startIndex = rowNum % baseSequence.length;
+                const rowString = generateRow(startIndex);
+                console.log(rowString);
+            }
+            
+            alert(`Таблица из ${rows} строк выведена в консоль браузера. Откройте консоль (F12), чтобы увидеть результат.`);
+        });
+    </script>
+</body>
+</html>
