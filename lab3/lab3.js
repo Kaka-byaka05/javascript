@@ -22,7 +22,7 @@ export function getDecimal(num) {
  * Делит числа с остатком.
  * @param {number} dividend — делимое.
  * @param {number} divisor — делитель.
- * @returns {Array<number>} Массив [частное, остаток].
+ * @returns {Array<number>} Массив [частное, остаток]. 
  */
 export function divmod(dividend, divisor) {
   if (divisor === 0) return [NaN, NaN];
