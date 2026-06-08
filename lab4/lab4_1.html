@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестирование lab4.js</title>
+    <!-- добавляем стили mocha для отображения результатов -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+    <!-- добавляем сам фреймворк mocha -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+    <script>
+        // включаем режим тестирования в стиле BDD
+        mocha.setup('bdd');
+    </script>
+    <!-- добавим chai -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+    <script>
+        // chai предоставляет большое количество функций. Объявим assert глобально
+        let assert = chai.assert;
+    </script>
+</head>
+
+<body>
+    <!-- скрипт со спецификацией -->
+    <script type="module">
+        import { Book, isEmpty, getSecondsToday, formatDate } from './lab4.js';
+
+        describe("Класс Book", function () {
+            let book;
+
+            beforeEach(function () {
+                book = new Book("JavaScript для начинающих", 2023, 1500);
+            });
+
+            it("конструктор создаёт объект с правильными свойствами", function () {
+                assert.strictEqual(book.title, "JavaScript для начинающих");
+                assert.strictEqual(book.pubYear, 2023);
+                assert.strictEqual(book.price, 1500);
+            });
+
+            it("метод show выводит информацию о книге", function () {
+                // Заменяем console.log для проверки вывода
+                const originalLog = console.log;
+                let logOutput = '';
+                console.log = (msg) => { logOutput = msg; };
+
+                book.show();
+                assert.include(logOutput, "Название: JavaScript для начинающих");
+                assert.include(logOutput, "Цена: 1500");
+
+                // Восстанавливаем оригинальный console.log
+                console.log = originalLog;
+            });
+
+            describe("геттеры и сеттеры", function () {
+                it("сеттер title отклоняет пустую строку", function () {
+                    assert.throws(() => { book.title = ""; }, Error, 'Название книги не может быть пустой строкой');
+                });
+
+                it("сеттер pubYear отклоняет отрицательные числа", function () {
+                    assert.throws(() => { book.pubYear = -2020; }, Error, 'Год издания должен быть положительным целым числом');
+                });
+
+                it("сеттер price отклоняет отрицательные числа", function () {
+                    assert.throws(() => { book.price = -100; }, Error, 'Цена должна быть положительным числом');
+                });
+            });
+
+            it("статический метод compare сортирует книги по году издания", function () {
+                const books = [
+                    new Book("Книга А", 2019, 800),
+                    new Book("Книга Б", 2021, 1100),
+                    new Book("Книга В", 2018, 950)
+                ];
+                books.sort(Book.compare);
+
+                assert.strictEqual(books[0].pubYear, 2018);
+                assert.strictEqual(books[1].pubYear, 2019);
+                assert.strictEqual(books[2].pubYear, 2021);
+            });
+        });
+
+        describe("функция isEmpty", function () {
+            it("isEmpty({}) => true", function () {
+                assert.strictEqual(isEmpty({}), true);
+            });
+
+            it("isEmpty({[Symbol()]: true}) => false", function () {
+                assert.strictEqual(isEmpty({[Symbol()]: true}), false);
+            });
+
+            it("isEmpty(Object.defineProperty({}, 'name', { value: 'John' })) => false", function () {
+                const obj = Object.defineProperty({}, 'name', { value: 'John' });
+                assert.strictEqual(isEmpty(obj), false);
+            });
+        });
+
+        describe("функция getSecondsToday", function () {
+            it("возвращает число секунд с начала дня (положительное число)", function () {
+                const seconds = getSecondsToday();
+                assert.isAbove(seconds, 0);
+                assert.isBelow(seconds, 86400); // в сутках 86 400 секунд
+            });
+        });
+
+        describe("функция formatDate", function () {
+            it("formatDate(new Date(2023, 4, 15)) => '15.05.23'", function () {
+                const date = new Date(2023, 4, 15);
+                assert.strictEqual(formatDate(date), '15.05.23');
+            });
+
+            it("formatDate с датой в начале месяца добавляет ведущие нули", function () {
+                const date = new Date(2023, 0, 5);
+                assert.strictEqual(formatDate(date), '05.01.23');
+            });
+        });
+    </script>
+
+    <!-- элемент с id="mocha" будет содержать результаты тестов -->
+    <div id="mocha"></div>
+
+    <!-- запускаем тесты! -->
+    <script>
+        window.onload = () => mocha.run();
+    </script>
+</body>
+
+</html>
