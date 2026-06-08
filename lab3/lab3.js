@@ -1,5 +1,9 @@
 'use strict';
 
+import {
+    fib
+  } from './lab2.js';
+
 /**
  * Возвращает дробную часть числа.
  * Для отрицательных чисел возвращает 1 - дробная часть модуля числа.
@@ -11,19 +15,6 @@ export function getDecimal(num) {
   const absNum = Math.abs(num);
   const fractional = absNum - Math.floor(absNum);
   return num < 0 ? 1 - fractional : fractional;
-}
-
-/**
- * Делит числа с остатком.
- * @param {number} dividend — делимое.
- * @param {number} divisor — делитель.
- * @returns {Array<number>} Массив [частное, остаток].
- */
-export function divmod(dividend, divisor) {
-  if (divisor === 0) return [NaN, NaN];
-  const quotient = Math.floor(dividend / divisor);
-  const remainder = dividend - quotient * divisor;
-  return [quotient, remainder];
 }
 
 /**
@@ -85,7 +76,6 @@ export function camelize(str) {
  * @param {number} n — количество чисел Фибоначчи для генерации.
  * @returns {BigInt[]} Массив чисел Фибоначчи.
  */
-import { fib } from './lab2.js';
 
 export function fibs(n) {
   const result = [];
