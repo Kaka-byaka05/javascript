@@ -79,16 +79,18 @@ export function camelize(str) {
 }
 
 /**
- * Импортирует функцию fib из lab2.js и возвращает массив чисел Фибоначчи до n-го элемента.
+ * Возвращает массив чисел Фибоначчи до n-го элемента (не включая его).
+ * Использует итеративный подход для эффективности.
  * @param {number} n — количество чисел Фибоначчи для генерации.
  * @returns {BigInt[]} Массив чисел Фибоначчи.
  */
-import { fib } from './lab2.js';
-
 export function fibs(n) {
-  const result = [];
-  for (let i = 0; i < n; i++) {
-    result.push(fib(i));
+  if (n <= 0) return [];
+  if (n === 1) return [0n];
+
+  const result = [0n, 1n];
+  for (let i = 2; i < n; i++) {
+    result.push(result[i - 1] + result[i - 2]);
   }
   return result;
 }
