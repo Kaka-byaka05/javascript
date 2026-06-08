@@ -6,7 +6,7 @@
  * @param {number} n — порядковый номер числа Фибоначчи (неотрицательное число).
  * @returns {BigInt} n‑е число Фибоначчи.
  */
-function fib(n) {
+export function fib(n) {
   if (n < 0) throw new Error('Номер числа Фибоначчи должен быть неотрицательным');
   if (n === 0) return 0n;
   if (n === 1) return 1n;
