@@ -19,20 +19,6 @@ export function getDecimal(num) {
 }
 
 /**
- * Делит числа с остатком.
- * @param {number} dividend — делимое.
- * @param {number} divisor — делитель.
- * @returns {Array<number>} Массив [частное, остаток].
- */
-export function divmod(dividend, divisor) {
-  if (divisor === 0) return [NaN, NaN];
-  const quotient = Math.trunc(dividend / divisor);
-  const remainder = dividend % divisor;
-  return [quotient, remainder];
-}
-
-
-/**
  * Возвращает строку с заглавной первой буквой.
  * @param {string} str — исходная строка.
  * @returns {string} Строка с заглавным первым символом или пустая строка, если исходная пустая.
