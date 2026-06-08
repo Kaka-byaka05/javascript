@@ -14,7 +14,8 @@ export function getDecimal(num) {
   if (Number.isInteger(num)) return 0;
   const absNum = Math.abs(num);
   const fractional = absNum - Math.floor(absNum);
-  return num < 0 ? 1 - fractional : fractional;
+  const result = num < 0 ? 1 - fractional : fractional;
+  return Number(result.toFixed(2));
 }
 
 /**
