@@ -26,8 +26,9 @@ export function getDecimal(num) {
  */
 export function divmod(dividend, divisor) {
   if (divisor === 0) return [NaN, NaN];
-  const quotient = Math.floor(dividend / divisor);
-  const remainder = dividend - (quotient * divisor);
+  const quotient = Math.trunc(dividend / divisor);
+  const remainder = dividend % divisor;
+
   return [quotient, remainder];
 }
 
