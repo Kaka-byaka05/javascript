@@ -9,16 +9,16 @@ class Book {
   #price;
 
   /**
-   * Приватное поле для хранения года издания книги.
-   * @private
-   */
-  #pubYear;
-
-  /**
    * Поле для хранения названия книги.
    * @private
    */
-  _title;
+  #title;
+
+  /**
+   * Поле для хранения года издания книги.
+   * @private
+   */
+  #pubYear;
 
   /**
    * Создаёт экземпляр книги.
@@ -37,7 +37,7 @@ class Book {
    * @returns {string} Название книги.
    */
   get title() {
-    return this._title;
+    return this.#title;
   }
 
   /**
@@ -49,7 +49,7 @@ class Book {
     if (typeof value !== 'string' || value.trim() === '') {
       throw new Error('Название книги не может быть пустой строкой');
     }
-    this._title = value.trim();
+    this.#title = value.trim();
   }
 
   /**
@@ -93,10 +93,10 @@ class Book {
   }
 
   /**
-   * Выводит в консоль название и цену книги.
+   * Выводит в консоль название и цену книги, используя геттеры.
    */
   show() {
-    console.log(`Название: ${this._title}, Цена: ${this.#price}`);
+    console.log(`Название: ${this.title}, Цена: ${this.price}`);
   }
 
   /**
