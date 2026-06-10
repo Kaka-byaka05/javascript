@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивное поле ввода</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .input-container {
+            position: relative;
+            width: 300px;
+            margin: 20px;
+        }
+
+        .user-input {
+            width: 100%;
+            padding: 16px 12px 8px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .placeholder-label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #888;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            padding: 0 6px;
+        }
+
+        .user-input:focus + .placeholder-label,
+        .user-input:not(:placeholder-shown) + .placeholder-label {
+            top: 4px;
+            font-size: 12px;
+            color: #4a90e2;
+            transform: translateY(0);
+        }
+
+        .user-input:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <input
+            type="text"
+            class="user-input"
+            placeholder=" "
+            data-hint="НАПИШИТЕ ЧТО‑НИБУДЬ ЗДЕСЬ"
+        >
+        <label class="placeholder-label" id="hintLabel">НАПИШИТЕ ЧТО‑НИБУДЬ ЗДЕСЬ</label>
+    </div>
+
+    <script>
+        'use strict';
+
+        class FloatingPlaceholder {
+            constructor(inputSelector, labelSelector) {
+                this.input = document.querySelector(inputSelector);
+                this.label = document.querySelector(labelSelector);
+                this.init();
+            }
+
+            init() {
+                this.updateLabelState();
+
+                this.input.addEventListener('focus', () => this.updateLabelState());
+                this.input.addEventListener('blur', () => this.updateLabelState());
+                this.input.addEventListener('input', () => this.updateLabelState());
+            }
+
+            updateLabelState() {
+                const isFocused = document.activeElement === this.input;
+                const hasContent = this.input.value.trim().length > 0;
+
+                if (isFocused || hasContent) {
+                    this.label.style.top = '4px';
+                    this.label.style.fontSize = '12px';
+                    this.label.style.color = '#4a90e2';
+                } else {
+                    this.label.style.top = '50%';
+                    this.label.style.fontSize = '16px';
+                    this.label.style.color = '#888';
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new FloatingPlaceholder('.user-input', '#hintLabel');
+        });
+    </script>
+</body>
+</html>
