@@ -20,18 +20,20 @@
 
     <script>
         'use strict';
-        const dropdown = document.getElementById('genre');
-        const codeDisplay = document.getElementById('selElement');
-        const nameDisplay = document.getElementById('selName');
 
-        function updateSelection() {
-            const currentOption = dropdown.options[dropdown.selectedIndex];
-            codeDisplay.textContent = selectedOption.value;
-            nameDisplay.textContent = selectedOption.text;
+        const selDiv = document.getElementById('genre');
+        const selectedElement = document.getElementById('selElement');
+        const selectedName = document.getElementById('selName');
+
+        function selOutput() {
+            const selectedOption = selDiv.options[selDiv.selectedIndex];
+            selectedElement.textContent = selectedOption.value;
+            selectedName.textContent = selectedOption.text;
         }
-
-        updateSelection();
-        dropdown.addEventListener('change', updateSelection);
+        
+        selOutput();
+        selDiv.addEventListener('change', selOutput);
     </script>
 </body>
+
 </html>
