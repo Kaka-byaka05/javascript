@@ -371,25 +371,19 @@
         'use strict';
 
         function colorChessboard() {
-            const table = document.querySelector('table');
-            const rows = table.querySelectorAll('tbody tr');
-        
-            rows.forEach((row, rowIndex) => {
-                const cells = row.querySelectorAll('td');
-                cells.forEach((cell, cellIndex) => {
-                    if (cellIndex === 0 || cellIndex === cells.length - 1) {
-                        return;
-                    }
-                    const adjustedCellIndex = cellIndex - 1;
-                    if ((rowIndex + adjustedCellIndex) % 2 === 0) {
-                        cell.style.backgroundColor = '#d18b47';
-                    } else {
-                        cell.style.backgroundColor = '#ffce9e';
-                    }
-                });
-            });
+            const rows = document.querySelectorAll('tr');
+
+            for (let i = 1; i <= 8; i++) {
+                const cells = rows[i].querySelectorAll('td');
+                for (let j = 1; j <= 8; j++)
+                    if ((i + j) % 2 === 0)
+                        cells[j].style.backgroundColor = '#ffce9e'; 
+                    else
+                        cells[j].style.backgroundColor = '#d18b47'; 
+            }
         }
-      colorChesboard;
+
+        colorChessboard()
 
     </script>
 </body>
