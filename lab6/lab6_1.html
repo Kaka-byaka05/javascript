@@ -9,7 +9,6 @@
   <select id="music-genre">
     <option value="Rock">Рок</option>
     <option value="Blues">Блюз</option>
-    <option value="Classic" selected>Классика</option>
   </select>
 
   <br><br>
@@ -17,15 +16,34 @@
 
   <script>
     'use strict';
-    const selectElement = document.getElementById('music-genre');
-    const selectedOption = selectElement.options[selectElement.selectedIndex];
-    const resultText = `
-      Выбрано:
-      - Значение (value): \${selectedOption.value}
-      - Текст опции: \${selectedOption.text}
-    `;
-    console.log(resultText);
-    document.getElementById('result').textContent = resultText;
+    document.addEventListener('DOMContentLoaded', function() {
+      const selectElement = document.getElementById('music-genre');
+
+      const newOption = document.createElement('option');
+      newOption.value = 'Classic';
+      newOption.textContent = 'Классика';
+
+      selectElement.appendChild(newOption);
+
+      selectElement.value = 'Classic';
+
+      const selectedOption = selectElement.options[selectElement.selectedIndex];
+
+      const resultText = 'Выбрано:\n' +
+                      '- Значение (value): ' + selectedOption.value + '\n' +
+              '- Текст опции: ' + selectedOption.text;
+
+      console.log(resultText);
+      document.getElementById('result').textContent = resultText;
+
+      selectElement.addEventListener('change', function() {
+        const currentOption = selectElement.options[selectElement.selectedIndex];
+        const updatedResult = 'Выбрано:\n' +
+                        '- Значение (value): ' + currentOption.value + '\n' +
+                '- Текст опции: ' + currentOption.text;
+        document.getElementById('result').textContent = updatedResult;
+      });
+    });
   </script>
 
 </body>
