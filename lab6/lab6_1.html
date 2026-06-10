@@ -21,13 +21,13 @@
     <script>
         'use strict';
         const dropdown = document.getElementById('genre');
-        const codeDisplay = document.querySelector('selElement');
-        const nameDisplay = document.querySelector('selName');
+        const codeDisplay = document.getElementById('selElement');
+        const nameDisplay = document.getElementById('selName');
 
         function updateSelection() {
             const currentOption = dropdown.options[dropdown.selectedIndex];
-            codeDisplay.textContent = currentOption.value;
-            nameDisplay.textContent = currentOption.text;
+            codeDisplay.textContent = selectedOption.value;
+            nameDisplay.textContent = selectedOption.text;
         }
 
         updateSelection();
