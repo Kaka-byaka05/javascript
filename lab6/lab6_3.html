@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Редактор заметок</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff; /* Лёгкий голубой фон */
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        #editableContent, textarea {
+            text-align: center;
+            font-size: 16px;
+            padding: 25px;
+            border-radius: 8px;
+            color: #2c3e50; /* Тёмно‑синий текст */
+        }
+
+        textarea {
+            width: 600px;
+            height: 250px;
+            border: 2px solid #3498db; /* Синяя рамка */
+            resize: vertical;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #e74c3c; /* Красный при фокусе */
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="editableContent">
+        Нажмите Ctrl+E, чтобы перейти в режим редактирования этой заметки.
+        После внесения правок используйте Ctrl+S для сохранения.
+        Для отмены изменений нажмите Esc.
+    </div>
+
+    <script>
+        'use strict';
+
+        let contentDiv = document.getElementById('editableContent');
+        let editor = null;
+
+        document.addEventListener('keydown', function (event) {
+            if (event.ctrlKey && (event.key === 'e' || event.key === 'у')) {
+                event.preventDefault();
+                if (!editor) {
+                    editor = document.createElement('textarea');
+                    editor.value = contentDiv.textContent;
+            editor.className = 'note-editor';
+            contentDiv.replaceWith(editor);
+            editor.focus();
+        }
+    }
+
+    else if (event.ctrlKey && (event.key === 's' || event.key === 'ы')) {
+        event.preventDefault();
+        if (editor) {
+            contentDiv.textContent = editor.value;
+            editor.replaceWith(contentDiv);
+            editor = null;
+        }
+    }
+
+    else if (event.key === 'Escape') {
+        if (editor) {
+            editor.replaceWith(contentDiv);
+            editor = null;
+        }
+    }
+});
+    </script>
+</body>
+</html>
