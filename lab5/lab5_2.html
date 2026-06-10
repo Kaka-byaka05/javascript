@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дерево из объекта</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        li::before {
+            content: "▪ ";
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script>
+        function createTree(container, data) {
+            const ul = document.createElement('ul');
+
+            function buildTree(obj, parentUl) {
+                for (const key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        const li = document.createElement('li');
+                        li.textContent = key;
+
+                        if (Object.keys(obj[key]).length > 0) {
+                            const nestedUl = document.createElement('ul');
+                            buildTree(obj[key], nestedUl);
+                            li.appendChild(nestedUl);
+                }
+
+                parentUl.appendChild(li);
+            }
+        }
+
+        buildTree(data, ul);
+        container.appendChild(ul);
+    }
+
+    const data = {
+        "Рыбы": {
+            "форель": {},
+            "лосось": {}
+        },
+        "Деревья": {
+            "Огромные": {
+                "секвойя": {},
+                "дуб": {}
+            },
+            "Цветковые": {
+                "яблоня": {},
+                "магнолия": {}
+            }
+        }
+    };
+
+    const container = document.getElementById('container');
+    createTree(container, data);
+    </script>
+</body>
+</html>
