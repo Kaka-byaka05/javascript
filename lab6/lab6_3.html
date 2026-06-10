@@ -50,37 +50,49 @@
     <script>
         'use strict';
 
-        let contentDiv = document.getElementById('editableContent');
+        const contentDiv = document.getElementById('editableContent');
         let editor = null;
+        const STORAGE_KEY = 'editableNoteContent'; // Ключ для localStorage
+
+        // Загрузка сохранённого содержимого при загрузке страницы
+        const savedContent = localStorage.getItem(STORAGE_KEY);
+        if (savedContent) {
+            contentDiv.textContent = savedContent;
+        }
 
         document.addEventListener('keydown', function (event) {
+            // Ctrl+E или Ctrl+У (русская раскладка) для редактирования
             if (event.ctrlKey && (event.key === 'e' || event.key === 'у')) {
                 event.preventDefault();
                 if (!editor) {
                     editor = document.createElement('textarea');
                     editor.value = contentDiv.textContent;
-            editor.className = 'note-editor';
-            contentDiv.replaceWith(editor);
-            editor.focus();
-        }
-    }
+                    editor.className = 'note-editor';
+                    contentDiv.replaceWith(editor);
+                    editor.focus();
+                }
+            }
 
-    else if (event.ctrlKey && (event.key === 's' || event.key === 'ы')) {
-        event.preventDefault();
-        if (editor) {
-            contentDiv.textContent = editor.value;
-            editor.replaceWith(contentDiv);
-            editor = null;
-        }
-    }
+            // Ctrl+S или Ctrl+Ы (русская раскладка) для сохранения
+            else if (event.ctrlKey && (event.key === 's' || event.key === 'ы')) {
+                event.preventDefault();
+                if (editor) {
+                    contentDiv.textContent = editor.value;
+                    // Сохраняем в localStorage
+                    localStorage.setItem(STORAGE_KEY, editor.value);
+                    editor.replaceWith(contentDiv);
+                    editor = null;
+                }
+            }
 
-    else if (event.key === 'Escape') {
-        if (editor) {
-            editor.replaceWith(contentDiv);
-            editor = null;
-        }
-    }
-});
+            // Esc для отмены
+            else if (event.key === 'Escape') {
+                if (editor) {
+                    editor.replaceWith(contentDiv);
+                    editor = null;
+                }
+            }
+        });
     </script>
 </body>
 </html>
