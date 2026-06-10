@@ -45,66 +45,34 @@
       text-align: center;
     }
 
-    article.lab-card:hover {
-      transform: translateY(-5px);
+    /* Стили для ссылки внутри карточки (делаем её на всю площадь) */
+    .lab-card a {
+      text-decoration: none;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    /* Эффект при наведении — подсвечивается вся карточка */
+    .lab-card:hover a {
+      color: #0066cc;
+      transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
-    article.lab-card a {
-      text-decoration: none;
-      color: #0066cc;
-      font-weight: bold;
-    }
-
-    article.lab-card a:hover {
-      text-decoration: underline;
-    }
-
-    .lab-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 20px;
-}
-
-.card-content {
-  flex: 1;
-  text-align: left;
-  font-weight: 500;
-  color: #333;
-}
-
-.nav-button {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba1 100%);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-}
-
-.nav-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.nav-button:active {
-  transform: scale(0.95);
-}
-
-
-    /* Адаптивность: мобильные устройства — 1 карточка в ряд */
+    /* Адаптивность */
     @media (min-width: 768px) {
-      /* Планшеты — 2 карточки в ряд */
       article.lab-card {
         width: calc(50% - 10px);
       }
     }
 
     @media (min-width: 1024px) {
-      /* Десктопы — 3 карточки в ряд */
       article.lab-card {
         width: calc(33.333% - 13.33px);
       }
@@ -115,90 +83,71 @@
   <h1>Лабораторные работы</h1>
 
   <div class="cards-container">
-  <!-- Лабораторная работа 1 -->
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 1 — Задание 1</div>
-    <button class="nav-button" onclick="window.location.href='lab1/lab1_1.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 1 — Задание 2</div>
-    <button class="nav-button" onclick="window.location.href='lab1/lab1_2.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 1 — Задание 3</div>
-    <button class="nav-button" onclick="window.location.href='lab1/lab1_3.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 1 — Задание 4</div>
-    <button class="nav-button" onclick="window.location.href='lab1/lab1_4.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 1 — Задание 5</div>
-    <button class="nav-button" onclick="window.location.href='lab1/lab1_5.html'"></button>
-  </article>
+    <!-- Лабораторная работа 1 -->
+    <article class="lab-card">
+      <a href="lab1/lab1_1.html">Лабораторная работа 1 — Задание 1</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab1/lab1_2.html">Лабораторная работа 1 — Задание 2</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab1/lab1_3.html">Лабораторная работа 1 — Задание 3</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab1/lab1_4.html">Лабораторная работа 1 — Задание 4</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab1/lab1_5.html">Лабораторная работа 1 — Задание 5</a>
+    </article>
 
-  <!-- Остальные карточки аналогично -->
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 2 — Задание 1</div>
-    <button class="nav-button" onclick="window.location.href='lab2/lab2_1.html'"></button>
-  </article>
+    <!-- Лабораторная работа 2 -->
+    <article class="lab-card">
+      <a href="lab2/lab2_1.html">Лабораторная работа 2 — Задание 1</a>
+    </article>
 
-  <!-- Лабораторная работа 3 -->
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 3 — Задание 1</div>
-    <button class="nav-button" onclick="window.location.href='lab3/lab3_1.html'"></button>
-  </article>
+    <!-- Лабораторная работа 3 -->
+    <article class="lab-card">
+      <a href="lab3/lab3_1.html">Лабораторная работа 3 — Задание 1</a>
+    </article>
 
-  <!-- Лабораторная работа 4 -->
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 4 — Задание 1</div>
-    <button class="nav-button" onclick="window.location.href='lab4/lab4_1.html'"></button>
-  </article>
+    <!-- Лабораторная работа 4 -->
+    <article class="lab-card">
+      <a href="lab4/lab4_1.html">Лабораторная работа 4 — Задание 1</a>
+    </article>
 
-  <!-- Лабораторная работа 5 -->
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 5 — Задание 1</div>
-    <button class="nav-button" onclick="window.location.href='lab5/lab5_1.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 5 — Задание 2</div>
-    <button class="nav-button" onclick="window.location.href='lab5/lab5_2.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 5 — Задание 3</div>
-    <button class="nav-button" onclick="window.location.href='lab5/lab5_3.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 5 — Задание 4</div>
-    <button class="nav-button" onclick="window.location.href='lab5/lab5_4.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 5 — Задание 5</div>
-    <button class="nav-button" onclick="window.location.href='lab5/lab5_5.html'"></button>
-  </article>
+    <!-- Лабораторная работа 5 -->
+    <article class="lab-card">
+      <a href="lab5/lab5_1.html">Лабораторная работа 5 — Задание 1</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab5/lab5_2.html">Лабораторная работа 5 — Задание 2</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab5/lab5_3.html">Лабораторная работа 5 — Задание 3</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab5/lab5_4.html">Лабораторная работа 5 — Задание 4</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab5/lab5_5.html">Лабораторная работа 5 — Задание 5</a>
+    </article>
 
-  <!-- Лабораторная работа 6 -->
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 6 — Задание 1</div>
-    <button class="nav-button" onclick="window.location.href='lab6/lab6_1.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 6 — Задание 2</div>
-    <button class="nav-button" onclick="window.location.href='lab6/lab6_2.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 6 — Задание 3</div>
-    <button class="nav-button" onclick="window.location.href='lab6/lab6_3.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 6 — Задание 4</div>
-    <button class="nav-button" onclick="window.location.href='lab6/lab6_4.html'"></button>
-  </article>
-  <article class="lab-card">
-    <div class="card-content">Лабораторная работа 6 — Задание 5</div>
-    <button class="nav-button" onclick="window.location.href='lab6/lab6_5.html'"></button>
-  </article>
-</div>
-
+    <!-- Лабораторная работа 6 -->
+    <article class="lab-card">
+      <a href="lab6/lab6_1.html">Лабораторная работа 6 — Задание 1</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab6/lab6_2.html">Лабораторная работа 6 — Задание 2</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab6/lab6_3.html">Лабораторная работа 6 — Задание 3</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab6/lab6_4.html">Лабораторная работа 6 — Задание 4</a>
+    </article>
+    <article class="lab-card">
+      <a href="lab6/lab6_5.html">Лабораторная работа 6 — Задание 5</a>
+    </article>
+  </div>
 </body>
 </html>
